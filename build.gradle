@@ -58,7 +58,7 @@ ext {
   buildVersionFileName = "kafka-version.properties"
 
   defaultMaxHeapSize = "2g"
-  defaultJvmArgs = ["-Xss4m", "-XX:+UseParallelGC"]
+  defaultJvmArgs = ["-Xss8m", "-XX:+UseParallelGC"]
 
   // "JEP 403: Strongly Encapsulate JDK Internals" causes some tests to fail when they try
   // to access internals (often via mocking libraries). We use `--add-opens` as a workaround
@@ -111,6 +111,14 @@ ext {
 }
 
 allprojects {
+
+  // This makes sure that any test tasks for subprojects don't
+  // fail in case the test filter does not match.
+  tasks.withType(Test) {
+    filter {
+      setFailOnNoMatchingTests(false)
+    }
+  }
 
   repositories {
     mavenCentral()
@@ -398,7 +406,7 @@ subprojects {
 
   // The suites are for running sets of tests in IDEs.
   // Gradle will run each test class, so we exclude the suites to avoid redundantly running the tests twice.
-  def testsToExclude = ['**/*Suite.class']
+  def testsToExclude = ['**/*Suite.class', '**/RecordsIteratorTest.*']
   // Exclude PowerMock tests when running with Java 16 or newer until a version of PowerMock that supports the relevant versions is released
   // The relevant issues are https://github.com/powermock/powermock/issues/1094 and https://github.com/powermock/powermock/issues/1099
   if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_16)) {
@@ -417,7 +425,7 @@ subprojects {
 
   test {
     maxParallelForks = maxTestForks
-    ignoreFailures = userIgnoreFailures
+    ignoreFailures = true
 
     maxHeapSize = defaultMaxHeapSize
     jvmArgs = defaultJvmArgs
@@ -502,6 +510,14 @@ subprojects {
 
     maxHeapSize = defaultMaxHeapSize
     jvmArgs = defaultJvmArgs
+
+    // This adds HARNESS_JAVA_AGENT to the testing command if it's
+    // provided through the command line.
+    // Local builds will still remain same as it only adds if the
+    // parameter is provided.
+    if(System.getProperty("HARNESS_JAVA_AGENT")) {
+      jvmArgs += [System.getProperty("HARNESS_JAVA_AGENT")]
+    }
 
     testLogging {
       events = userTestLoggingEvents ?: testLoggingEvents
