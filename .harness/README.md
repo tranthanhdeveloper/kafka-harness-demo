@@ -14,11 +14,11 @@ TBD - point to the Harness CI blog and unscripted conference
   * Select the `Continuous Integration` module and choose the `Starter pipeline` wizard to create your first pipeline using the forked repo from #2.
   * Go to the newly created pipeline and hit the `Triggers`tab. If everything went well, you should see two triggers auto-created. A `Pull Request`trigger and a `Push`trigger. For this exercise, we only need `Pull Request`trigger to be enabled. So, please disable or delete the `Push`trigger.
 
-4. If you are an existing Harness CI user, you can create a new pipeline and use Hosted Builds.
+4. If you are an existing Harness CI user, create a new pipeline to use the cloud option for infrastructure and setup the PR trigger.
 
 5. Enable Test Intelligence:
 
-* Edit the pipeline yaml in the yaml to add this new step to the pipeline's YAML:
+* Edit the pipeline yaml in the yaml editor to add this new step:
 ```
 - step:
   type: RunTests
