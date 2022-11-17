@@ -1,11 +1,12 @@
 # Build and Test Apache Kafka on Harness CI
 
-This is a fork of Apache Kafka project. This project was used to demo the new capabilities of Harness CI at Unscripted conference.
-This file contains instructions on how to run the Apache Kafka pipeline shown during the unscripted conference demo on Harness CI.
-TBD - point to the Harness CI blog and unscripted conference
+This is a fork of Apache Kafka project. This project was used to demo the new capabilities of Harness CI at [Unscripted Conference 2022](https://www.unscriptedconf.io/). This file contains instructions on how to run the Apache Kafka pipeline shown during the demo.
 
+- [Harness Fast CI Blog Announcement](https://harness.io/blog/announcing-speed-enhancements-and-hosted-builds-for-harness-ci)
+- [Get Started with Harness CI](https://harness.io/products/continuous-integration)
 
 ## Setting up this pipeline on Harness CI Hosted Builds
+
 1. Create a [GitHub Account](https://github.com) or use an existing one
 
 2. Fork [this repository](https://github.com/harness-community/kafka/fork) into your GitHub account. 
@@ -21,21 +22,21 @@ TBD - point to the Harness CI blog and unscripted conference
 * Edit the pipeline yaml in the yaml editor to add this new step:
 ```
 - step:
-  type: RunTests
-  name: Run Tests with Intelligence
-  identifier: Run_Tests_with_Intelligence
-  spec:
-    language: Java
-    buildTool: Gradle
-    args: "--build-cache unitTest -PmaxParallelForks=32 -PignoreFailures=true"
-    packages: org.apache.kafka,kafka.test,kafka.testkit,kafka.server,kafka.tools,kafka.examples,test.plugins
-    runOnlySelectedTests: true
-    preCommand: ls
-    reports:
-      type: JUnit
-      spec:
-        paths:
-          - "**/*.xml"
+    type: RunTests
+    name: Run Tests with Intelligence
+    identifier: Run_Tests_with_Intelligence
+    spec:
+      language: Java
+      buildTool: Gradle
+      args: "--build-cache unitTest -PmaxParallelForks=32 -PignoreFailures=true"
+      packages: org.apache.kafka,kafka.test,kafka.testkit,kafka.server,kafka.tools,kafka.examples,test.plugins
+      runOnlySelectedTests: true
+      preCommand: ls
+      reports:
+        type: JUnit
+        spec:
+          paths:
+            - "**/*.xml"
 ```
 * The generated yaml should look like below.
 <img width="1050" alt="cikafkademo" src="https://user-images.githubusercontent.com/1132652/202065467-9ed42c8b-bc55-4971-9c2d-14be8dd81b03.png">
