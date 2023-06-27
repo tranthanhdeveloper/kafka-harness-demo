@@ -31,18 +31,19 @@ pipeline:
                   spec:
                     language: Java
                     buildTool: Gradle
-                    args: "--build-cache unitTest -PmaxParallelForks=32 -PignoreFailures=true"
+                    args: clean test
                     packages: org.apache.kafka,kafka.test,kafka.testkit,kafka.server,kafka.tools,kafka.examples,test.plugins
                     runOnlySelectedTests: true
                     preCommand: ls
                     reports:
                       type: JUnit
-                      paths:
-                        - "**/*.xml"
+                      spec:
+                        paths:
+                          - "**/*.xml"
           platform:
             os: Linux
-            arch: Amd64
+            arch: Arm64
           runtime:
-            type: Docker
+            type: Cloud
             spec: {}
         type: CI
