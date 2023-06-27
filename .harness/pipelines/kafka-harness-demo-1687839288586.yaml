@@ -40,6 +40,7 @@ pipeline:
                       spec:
                         paths:
                           - "**/*.xml"
+                  timeout: 1h
           platform:
             os: Linux
             arch: Arm64
