@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_kafka_harness_demo_1687962942086-push-trigger-input-set
+  identifier: Build_kafka_harness_demo_1687962942086pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: harnesskafkademo
+  pipeline:
+    identifier: Build_kafka_harness_demo_1687962942086
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
