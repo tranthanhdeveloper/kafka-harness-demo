@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_kafka_harness_demo_1687962942086-pr-trigger-input-set
+  identifier: Build_kafka_harness_demo_1687962942086prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: harnesskafkademo
+  pipeline:
+    identifier: Build_kafka_harness_demo_1687962942086
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
