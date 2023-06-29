@@ -31,7 +31,7 @@ pipeline:
                   spec:
                     language: Java
                     buildTool: Gradle
-                    args: clean test
+                    args: ./gradlew clean test
                     runOnlySelectedTests: true
                     reports:
                       type: JUnit
