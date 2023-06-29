@@ -31,7 +31,7 @@ import java.util.Optional;
  * NOTE: This class is intended for INTERNAL usage only within Kafka.
  */
 public class ApiVersions {
-
+// haha huhu hehe
     private final Map<String, NodeApiVersions> nodeApiVersions = new HashMap<>();
     private byte maxUsableProduceMagic = RecordBatch.CURRENT_MAGIC_VALUE;
 
